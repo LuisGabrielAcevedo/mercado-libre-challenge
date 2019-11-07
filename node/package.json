@@ -1,0 +1,29 @@
+{
+  "name": "mercado-libre-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "all": "nodemon ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuisGabrielAcevedo/mercado-libre-challenge.git"
+  },
+  "author": "Luis gabriel Acevedo Ramirez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LuisGabrielAcevedo/mercado-libre-challenge/issues"
+  },
+  "homepage": "https://github.com/LuisGabrielAcevedo/mercado-libre-challenge#readme",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  }
+}

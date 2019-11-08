@@ -27,8 +27,7 @@ function formatItem(item) {
       currency: item.currency_id,
       amount:
         item.price % 1 == 0 ? item.price : +item.price.toString().split(".")[0],
-      decimals:
-        item.price % 1 == 0 ? null : +item.price.toString().split(".")[1]
+      decimals: item.price % 1 == 0 ? 0 : +item.price.toString().split(".")[1]
     },
     picture: item.pictures ? item.pictures[0].url : item.thumbnail,
     condition: item.condition,
@@ -43,9 +42,9 @@ function formatCategories(resp) {
     filter => filter.id === "category"
   );
   // 2. Sort categories
-  const categories = selectCategoryFilter.values.sort(
-    (a, b) => b.results - a.results
-  );
+  const categories = selectCategoryFilter
+    ? selectCategoryFilter.values.sort((a, b) => b.results - a.results)
+    : [];
   // 3. Format categories
   return categories.map(c => c.name);
 }

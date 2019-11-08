@@ -1,0 +1,16 @@
+@keyframes gradient {
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.loading {
+  animation: gradient 2s infinite linear;
+  background: linear-gradient(to right, #ecebec 8%, #f9f9f9 18%, #ecebec 33%);
+  background-size: 800px 100px;
+  height: 600px;
+  width: 100%;
+}

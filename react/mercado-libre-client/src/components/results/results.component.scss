@@ -1,0 +1,44 @@
+.results {
+  padding: 10px 0;
+}
+
+.card {
+  background-color: white;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 -1px 2px 0 rgba(0, 0, 0, 0.1);
+  height: 200px;
+  cursor: pointer;
+  &__image {
+    width: 180px;
+    height: 180px;
+    margin: 10px;
+    img {
+      height: 100%;
+    }
+  }
+  &__description {
+    margin: 20px 5px;
+    &__currency {
+      font-size: 30px;
+      font-weight: 400;
+      margin-right: 10px;
+    }
+    &__price {
+      font-size: 30px;
+      font-weight: 400;
+      color: #333;
+    }
+    &__decimals {
+      font-weight: 400;
+      position: relative;
+      bottom: 10px;
+      left: 2px;
+    }
+    &__title {
+      font-weight: 500;
+      color: #333;
+    }
+  }
+  &__location {
+    margin: 40px 10px;
+  }
+}

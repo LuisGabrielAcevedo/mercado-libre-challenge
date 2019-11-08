@@ -1,3 +1,3 @@
 In the project directory, you can run:
 
-### `npm run all`
+### `npm install` and `npm run all`

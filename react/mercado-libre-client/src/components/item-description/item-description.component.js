@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import { searchItemDescriptionAction } from "../../store/search/search.actions";
 import DetailsComponent from "./details.componet";
 import "./item-description.component.scss";
-import LoadingComonent from "../common/loading/loading.component";
+import { LoadingComonent, AlertComponent } from "../common/common.index";
 
 class ItemDescriptionComponent extends Component {
   componentDidMount() {
@@ -28,7 +28,7 @@ class ItemDescriptionComponent extends Component {
         ) : item ? (
           <DetailsComponent item={item} />
         ) : (
-          <div>Item no encontrado</div>
+          <AlertComponent message={"El id de la búsqueda no existe"} />
         )}
       </div>
     );

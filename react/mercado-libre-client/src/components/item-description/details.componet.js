@@ -15,7 +15,7 @@ function DetailsComponent({ item }) {
           <span className="details__condition">
             {condition(item.condition)} - {`${item.sold_quantity} vendidos`}
           </span>
-          <h1 className="details__title">{item.title}</h1>
+          <h1 className="title">{item.title}</h1>
           <div className="details__price">
             <span className="details__price__currency">
               {currency(item.price.currency)}
@@ -30,10 +30,12 @@ function DetailsComponent({ item }) {
           </div>
         </Grid>
       </Grid>
-      <div className="details__description">
-        <h1 className="details__title">Descripcion del producto</h1>
-        <p>{item.description}</p>
-      </div>
+      {item.description ? (
+        <div className="details__description">
+          <h1 className="title">Descripcion del producto</h1>
+          <p>{item.description}</p>
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -5,7 +5,7 @@ import { searchItemsAction } from "../../store/search/search.actions";
 import { parse } from "query-string";
 import "./results.component.scss";
 import CardComponent from "./card.component";
-import LoadingComonent from "../common/loading/loading.component";
+import { LoadingComonent, AlertComponent } from "../common/common.index";
 
 class ResultsComponent extends Component {
   componentDidMount() {
@@ -34,7 +34,9 @@ class ResultsComponent extends Component {
         ) : items.length ? (
           items.map((item, i) => <CardComponent key={i} item={item} />)
         ) : (
-          <div>No hay resultados para esa busqueda</div>
+          <AlertComponent
+            message={"No hay publicaciones que coincidan con tu búsqueda"}
+          />
         )}
       </div>
     );

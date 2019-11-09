@@ -3,7 +3,7 @@ import "./app-bar.component.scss";
 import Grid from "@material-ui/core/Grid";
 import SearchComponent from "./search.component";
 import { useHistory } from "react-router-dom";
-import logo from "../../../logo.png";
+import logo from "../../../assets/ml.png";
 
 function AppBarComponent() {
   const history = useHistory();

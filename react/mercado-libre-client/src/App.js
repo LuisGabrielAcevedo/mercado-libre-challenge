@@ -1,11 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
-import AppBarComponent from "./components/common/app-bar/app-bar.component";
+import {
+  AppBarComponent,
+  BreadcrumbComponent
+} from "./components/common/common.index";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import AppRoutes from "./App.routes";
-import BreadcrumbComponent from "./components/common/breadcrumb/breadcrumb.component";
 import "./App.scss";
+// Lazy loading routes
+import AppRoutes from "./App.routes";
 
 function App({ searchState }) {
   return (

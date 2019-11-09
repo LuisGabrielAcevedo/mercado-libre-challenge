@@ -1,5 +1,7 @@
+@import "../../../styles/global.scss";
+
 .app-tool-bar {
-  background-color: #fff159;
+  background-color: $primary-color;
   width: 100%;
   height: 48px;
   &__logo {
@@ -21,10 +23,10 @@
     flex: 1;
   }
   &__icon {
-    color: rgb(107, 107, 107);
+    color: $gray;
     font-size: 20px !important;
     padding: 7px;
     cursor: pointer;
-    background-color: #e7e7e7;
+    background-color: $primary-background-color;
   }
 }

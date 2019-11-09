@@ -1,3 +1,5 @@
+@import "./styles/global.scss";
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -5,7 +7,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #e7e7e7;
+  background-color: $primary-background-color;
 }
 
 code {
@@ -14,7 +16,7 @@ code {
 }
 
 ::-webkit-input-placeholder {
-  color: gray !important;
+  color: $gray !important;
   font-weight: lighter;
   font-size: 14px;
 }

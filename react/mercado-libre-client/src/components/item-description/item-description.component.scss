@@ -1,59 +1,96 @@
+@import "../../styles/global.scss";
+
 .description {
   padding: 10px 0;
 }
+
 .details {
-  background-color: white;
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 -1px 2px 0 rgba(0, 0, 0, 0.1);
+  background-color: $white;
+  box-shadow: 0 1px 1px 0 $gray-background-color,
+    0 -1px 2px 0 $gray-background-color;
   border-radius: 4px;
-  &__image-content {
-    height: 600px;
-    width: 100%;
-    padding: 10px;
-    img {
-      height: 100%;
+  &__info {
+    border-bottom: 1px solid $gray-background-color;
+    &__pictures {
+      width: 110px;
+      border-right: 1px solid $gray-background-color;
+    }
+    &__picture {
+      height: 600px;
       width: 100%;
+      padding: 10px;
+      text-align: center;
+      &__content {
+        height: 100%;
+      }
+      img {
+        width: 100%;
+        max-height: 580px;
+      }
+    }
+    &__details {
+      padding: 32px;
+      border-left: 1px solid $gray-background-color;
+      &__condition {
+        font-size: 14px;
+        color: $text-secondary-color;
+        line-height: 1;
+      }
+      &__price {
+        margin-bottom: 40px;
+        &__currency {
+          font-size: 44px;
+          font-weight: 400;
+          margin-right: 10px;
+        }
+        &__amount {
+          font-size: 44px;
+          font-weight: 400;
+          color: $text-primary-color;
+        }
+        &__decimals {
+          font-weight: 400;
+          position: relative;
+          bottom: 18px;
+          left: 2px;
+        }
+      }
+      &__button {
+        background-color: $secondary-background-color;
+        width: 100%;
+        color: $white;
+        font-size: 18px;
+        font-weight: 400;
+        text-transform: none;
+        cursor: pointer;
+        text-align: center;
+        border-radius: 4px;
+        padding: 10px 0;
+      }
+    }
+    &__description {
+      padding: 32px;
     }
   }
-  &__condition {
-    font-size: 14px;
-    color: #666;
-    line-height: 1;
-  }
-  &__content {
-    padding: 32px;
-  }
-  &__price {
-    margin-bottom: 40px;
-    &__currency {
-      font-size: 44px;
-      font-weight: 400;
-      margin-right: 10px;
-    }
-    &__amount {
-      font-size: 44px;
-      font-weight: 400;
-      color: #333;
-    }
-    &__decimals {
-      font-weight: 400;
-      position: relative;
-      bottom: 18px;
-      left: 2px;
-    }
-  }
-  &__button {
-    background-color: #3483fa;
-    width: 100%;
-    color: white;
-    font-size: 18px;
-    font-weight: 400;
-    text-transform: none;
-    cursor: pointer;
+}
+
+.list {
+  &__item {
+    padding-top: 4px;
     text-align: center;
-    border-radius: 4px;
-    padding: 10px 0;
+    cursor: pointer;
+    height: 100px;
+    padding: 4px;
+    &__content {
+      height: 100%;
+      img {
+        max-height: 92px;
+        width: 100%;
+      }
+    }
   }
-  &__description {
-    padding: 32px;
-  }
+}
+
+.pic--active {
+  border-left: 4px solid $secondary-background-color;
 }

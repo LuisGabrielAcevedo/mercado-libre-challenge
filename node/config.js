@@ -6,7 +6,8 @@ const config = {
   author: {
     name: "Luis gabriel",
     lastname: "Acevedo ramírez"
-  }
+  },
+  urlBase: "https://api.mercadolibre.com"
 };
 
 module.exports = config;

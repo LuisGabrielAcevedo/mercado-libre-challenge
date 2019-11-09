@@ -3,8 +3,8 @@ const config = require("../config");
 
 async function getItems(req, res) {
   try {
-    // 1. Search item req.query.q
-    const resp = await MLApiService.searchItems(req.query.q);
+    // 1. Search item
+    const resp = await MLApiService.searchItems(req.query);
     // 2 Format categories
     const formattedCategories = MLApiService.formatCategories(resp);
     // 3. Format items
@@ -25,8 +25,15 @@ async function getItems(req, res) {
       categories: formattedCategories,
       items: formattedItems
     };
-    // 6. Send response
-    res.status(200).send(formattedResp);
+    // 6. Add Pagination
+    if (resp.paging)
+      formattedResp.pagination = {
+        total: resp.paging.total,
+        perPage: resp.paging.limit,
+        page: resp.paging.offset / resp.paging.limit + 1
+      };
+    // 7. Send response
+    return res.status(200).send(formattedResp);
   } catch (e) {
     return res.status(500).send({ mgs: "Server error" });
   }
@@ -41,21 +48,41 @@ async function findItem(req, res) {
     ]);
     // 2. Format item
     const formattedItem = MLApiService.formatItem(resp[0]);
-    // 3. Set description
+    // 3. Search category descriptions
+    const category = await MLApiService.getCategory(resp[0].category_id);
+    formattedItem.category = category.name;
+    // 4. Set description
     formattedItem.description = resp[1].plain_text;
-    // 4. End response
+    // 5. End response
     const formattedResp = {
       author: config.author,
       item: formattedItem
     };
-    // 5. Send response
-    res.status(200).send(formattedResp);
+    // 6. Send response
+    return res.status(200).send(formattedResp);
   } catch (e) {
     return res.status(500).send({ mgs: "Server error, item not found" });
   }
 }
 
+async function itemPictures(req, res) {
+  try {
+    // 1. Search item
+    const resp = await MLApiService.findItem(req.params.id);
+    // 5. End response
+    const formattedResp = {
+      author: config.author,
+      pictures: resp.pictures || []
+    };
+    // 6. Send response
+    return res.status(200).send(formattedResp);
+  } catch (e) {
+    return res.status(500).send({ mgs: "Server error" });
+  }
+}
+
 module.exports = {
   getItems,
-  findItem
+  findItem,
+  itemPictures
 };

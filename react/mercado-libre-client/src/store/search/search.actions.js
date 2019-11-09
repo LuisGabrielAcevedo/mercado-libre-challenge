@@ -24,23 +24,30 @@ const startSearchItemDescriptionAction = () => {
   };
 };
 
-const setItemDescriptionAction = item => {
+const setItemDescriptionAction = data => {
   return {
     type: SET_ITEM_DESCRIPTION,
-    payload: item
+    payload: data
   };
 };
 
-const searchItemsAction = value => {
+const searchItemsAction = data => {
   return async dispatch => {
-    dispatch(startSearchItemsAction(value));
-    const resp = await Items.option("q", value).find();
+    dispatch(startSearchItemsAction(data.value));
+    const resp = await Items.page(data.page)
+      .perPage(data.perPage)
+      .option("q", data.value)
+      .find();
     try {
       dispatch(
-        setItemsAction({ items: resp.items, categories: resp.categories })
+        setItemsAction({
+          items: resp.items,
+          categories: resp.categories,
+          pagination: resp.pagination
+        })
       );
     } catch (e) {
-      dispatch(setItemsAction({ items: [], categories: [] }));
+      dispatch(setItemsAction({ items: [], categories: [], pagination: null }));
     }
   };
 };
@@ -50,9 +57,14 @@ const searchItemDescriptionAction = id => {
     dispatch(startSearchItemDescriptionAction());
     try {
       const resp = await Items.findById(id);
-      dispatch(setItemDescriptionAction(resp.item));
+      dispatch(
+        setItemDescriptionAction({
+          item: resp.item,
+          categories: [resp.item.category]
+        })
+      );
     } catch (e) {
-      dispatch(setItemDescriptionAction(null));
+      dispatch(setItemDescriptionAction({ item: null, categories: [] }));
     }
   };
 };

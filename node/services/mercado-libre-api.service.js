@@ -1,22 +1,27 @@
 const axios = require("axios");
+const config = require("../config");
 
-async function searchItems(value) {
-  const items = await axios.get(
-    `https://api.mercadolibre.com/sites/MLA/search?q=${value}&limit=4`
+async function searchItems(query) {
+  const offset = (query.page - 1) * query.perPage;
+  const resp = await axios.get(
+    `${config.urlBase}/sites/MLA/search?q=${query.q}&limit=${query.perPage}&offset=${offset}`
   );
-  return items.data;
+  return resp.data;
 }
 
 async function findItem(id) {
-  const items = await axios.get(`https://api.mercadolibre.com/items/${id}`);
-  return items.data;
+  const resp = await axios.get(`${config.urlBase}/items/${id}`);
+  return resp.data;
 }
 
 async function findItemDescription(id) {
-  const items = await axios.get(
-    `https://api.mercadolibre.com/items/${id}/description`
-  );
-  return items.data;
+  const resp = await axios.get(`${config.urlBase}/items/${id}/description`);
+  return resp.data;
+}
+
+async function getCategory(id) {
+  const resp = await axios.get(`${config.urlBase}/categories/${id}`);
+  return resp.data;
 }
 
 function formatItem(item) {
@@ -27,7 +32,8 @@ function formatItem(item) {
       currency: item.currency_id,
       amount:
         item.price % 1 == 0 ? item.price : +item.price.toString().split(".")[0],
-      decimals: item.price % 1 == 0 ? 0 : +item.price.toString().split(".")[1]
+      decimals:
+        item.price % 1 == 0 ? null : +item.price.toString().split(".")[1]
     },
     picture: item.pictures ? item.pictures[0].url : item.thumbnail,
     condition: item.condition,
@@ -54,5 +60,6 @@ module.exports = {
   findItem,
   findItemDescription,
   formatItem,
-  formatCategories
+  formatCategories,
+  getCategory
 };

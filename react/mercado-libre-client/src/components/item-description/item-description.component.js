@@ -19,14 +19,12 @@ class ItemDescriptionComponent extends Component {
 
   render() {
     const { searchState } = this.props;
-    const item = searchState.selectedItem;
-    const loading = searchState.loading;
     return (
       <div className="description">
-        {loading ? (
+        {searchState.loading ? (
           <LoadingComonent />
-        ) : item ? (
-          <DetailsComponent item={item} />
+        ) : searchState.selectedItem ? (
+          <DetailsComponent item={searchState.selectedItem} />
         ) : (
           <AlertComponent message={"El id de la búsqueda no existe"} />
         )}

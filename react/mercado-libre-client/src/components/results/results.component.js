@@ -5,7 +5,11 @@ import { searchItemsAction } from "../../store/search/search.actions";
 import { parse } from "query-string";
 import "./results.component.scss";
 import CardComponent from "./card.component";
-import { LoadingComonent, AlertComponent } from "../common/common.index";
+import {
+  LoadingComonent,
+  AlertComponent,
+  PaginatorComponent
+} from "../common/common.index";
 
 class ResultsComponent extends Component {
   componentDidMount() {
@@ -17,22 +21,34 @@ class ResultsComponent extends Component {
     if (location !== nextProps.location) this.searchItemsFn();
   }
 
-  searchItemsFn() {
+  searchItemsFn(page) {
     const { location, searchItems } = this.props;
     const queryData = parse(location.search);
-    searchItems(queryData.search);
+    searchItems({
+      value: queryData.search,
+      page: page || 1,
+      perPage: 4
+    });
   }
 
   render() {
     const { searchState } = this.props;
-    const items = searchState.items;
-    const loading = searchState.loading;
     return (
       <div className="results">
-        {loading ? (
+        {searchState.loading ? (
           <LoadingComonent />
-        ) : items.length ? (
-          items.map((item, i) => <CardComponent key={i} item={item} />)
+        ) : searchState.items.length ? (
+          <div>
+            {searchState.items.map((item, i) => (
+              <CardComponent key={i} item={item} />
+            ))}
+            <PaginatorComponent
+              page={searchState.pagination.page}
+              total={searchState.pagination.total}
+              perPage={searchState.pagination.perPage}
+              changePagination={page => this.searchItemsFn(page)}
+            />
+          </div>
         ) : (
           <AlertComponent
             message={"No hay publicaciones que coincidan con tu búsqueda"}
@@ -51,7 +67,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    searchItems: value => dispatch(searchItemsAction(value))
+    searchItems: data => dispatch(searchItemsAction(data))
   };
 };
 

@@ -1,5 +1,7 @@
+@import "../../../styles/global.scss";
+
 .alert {
-  background-color: white;
+  background-color: $white;
   padding: 40px 80px;
   img {
     height: 100px;
